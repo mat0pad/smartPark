@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/new/images">
+        <file>1-down.png</file>
+        <file>1-up.png</file>
+        <file>3-down.png</file>
+        <file>3-up.png</file>
+        <file>carImage.png</file>
+        <file>2-down.png</file>
+        <file>empty.png</file>
+        <file>3-front_r.png</file>
+        <file>3-bottom_l.png</file>
+        <file>3-bottom_r.png</file>
+        <file>3-front_l.png</file>
+        <file>side-empty.png</file>
+        <file>2-front_l.png</file>
+        <file>1-bottom_l.png</file>
+        <file>1-bottom_r.png</file>
+        <file>2-bottom_r.png</file>
+        <file>2-front_r.png</file>
+        <file>2-bottom_l.png</file>
+        <file>1-front_l.png</file>
+        <file>2-up.png</file>
+        <file>1-front_r.png</file>
+    </qresource>
+</RCC>
