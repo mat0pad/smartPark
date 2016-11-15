@@ -6,7 +6,6 @@ void SPIWorker::run()
 
    while(1)
    {
-
         QThread::sleep(1);
 
         emit progressChanged(1, 1);

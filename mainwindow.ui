@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>739</width>
-    <height>376</height>
+    <width>800</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>741</width>
-      <height>381</height>
+      <width>801</width>
+      <height>481</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -229,22 +229,6 @@ border-bottom-color: rgb(255, 255, 255);</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QLabel" name="bottom_m">
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap resource="res.qrc">:/new/images/1-down.png</pixmap>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignHCenter|Qt::AlignTop</set>
-           </property>
-          </widget>
-         </item>
          <item row="3" column="0">
           <widget class="QLabel" name="none_2">
            <property name="minimumSize">
@@ -372,36 +356,27 @@ border-bottom-color: rgb(255, 255, 255);</string>
            </item>
           </layout>
          </item>
+         <item row="3" column="1">
+          <widget class="QLabel" name="bottom_m">
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="res.qrc">:/new/images/1-down.png</pixmap>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignHCenter|Qt::AlignTop</set>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
      </item>
     </layout>
-   </widget>
-   <widget class="QLabel" name="none_4">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>350</y>
-      <width>52</width>
-      <height>56</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>50</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
    </widget>
   </widget>
  </widget>
