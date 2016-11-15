@@ -14,11 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    spiworker.cpp
+    spiworker.cpp \
+    gpioworker.cpp
 
 HEADERS  += mainwindow.h \
-    sleeper.h \
-    spiworker.h
+    spiworker.h \
+    gpioworker.h
 
 FORMS    += mainwindow.ui
 

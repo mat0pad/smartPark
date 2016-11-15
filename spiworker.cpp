@@ -2,7 +2,7 @@
 
 void SPIWorker::run()
 {
-   qDebug() << "Hello from SPIWorker" << thread()->currentThreadId();
+   qDebug() << "Hello from SPI Thread" << thread()->currentThreadId();
 
    while(1)
    {

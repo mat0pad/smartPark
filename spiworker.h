@@ -1,6 +1,5 @@
 #ifndef SPIWORKER
 #define SPIWORKER
-#include <QString>
 #include <QThread>
 #include <QDebug>
 

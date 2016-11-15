@@ -24,7 +24,8 @@ private:
 
 // Define slot:
 public slots:
-        void onProgressChanged(unsigned char imageSelect, unsigned char image);
+        void onSensorChanged(unsigned char imageSelect, unsigned char image);
+        void onSectionChanged(bool shouldTurnOn);
 };
 
 #endif // MAINWINDOW_H
