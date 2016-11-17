@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <QUrl>
+#include <QtWebKit/QWebView>
 
 namespace Ui {
 class MainWindow;
@@ -16,6 +18,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void startCamera();
     void setImage(unsigned char imageSelect, unsigned char image = 0);
     void setAllImages2Zero();
 

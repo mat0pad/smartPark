@@ -12,10 +12,15 @@ int main(int argc, char *argv[])
 
     // Setup UI
     MainWindow w;
-    w.show();
+
+    w.setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    w.showFullScreen();
 
     // All images is invisible
     w.setAllImages2Zero();
+
+    // Show camera feed
+    w.startCamera();
 
     /** SPI THREAD SETUP START **/
     // Create SPI Thread
