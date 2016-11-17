@@ -10,12 +10,24 @@ void GPIOWorker::run()
 
     emit turnOnSection(false);
 
-    while(1){}
+    while(1)
+    {
+            Camera cTest;
+
+            cTest.start();
+
+            GPIOWorker::sleep(30);
+
+            cTest.exit();
+
+            GPIOWorker::sleep(30);
+    }
 }
 
 void GPIOWorker::turnOnDisplay(bool shouldTurnOn)
 {
     // Turn off/on display here'
+
 }
 
 

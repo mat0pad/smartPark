@@ -2,6 +2,7 @@
 #define GPIOWORKER_H
 #include <QThread>
 #include <QDebug>
+#include "camera.h"
 
 class GPIOWorker: public QThread
 {

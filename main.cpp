@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include <spiworker.h>
+#include <uartworker.h>
 #include <QDebug>
 #include <gpioworker.h>
 
@@ -24,18 +24,18 @@ int main(int argc, char *argv[])
 
     /** SPI THREAD SETUP START **/
     // Create SPI Thread
-    SPIWorker spiWorker;
+    UARTWorker uartWorker;
 
     // Setup connection between SPI thread & GUI thread
-    QObject::connect(&spiWorker,
+    QObject::connect(&uartWorker,
                      SIGNAL(progressChanged(unsigned char, unsigned char)), &w,
                      SLOT(onSensorChanged(unsigned char,unsigned char)), Qt::QueuedConnection);
 
     // Setup callback for cleanup when it finishes
-    QObject::connect(&spiWorker, SIGNAL(finished()), &w, SLOT(deleteLater()));
+    QObject::connect(&uartWorker, SIGNAL(finished()), &w, SLOT(deleteLater()));
 
     // Start -> calls run()
-    spiWorker.start();
+    uartWorker.start();
 
     /** SPI THREAD SETUP END **/
 
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
     app.exec();
 
-    spiWorker.wait();
+    uartWorker.wait();
     gpioWorker.wait();
 
     return 0;

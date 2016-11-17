@@ -25,7 +25,7 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="spacing">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
@@ -51,8 +51,8 @@
          </property>
          <property name="maximumSize">
           <size>
-           <width>582</width>
-           <height>40</height>
+           <width>600</width>
+           <height>49</height>
           </size>
          </property>
          <property name="font">
@@ -72,7 +72,7 @@
           <enum>QFrame::Box</enum>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bakkamera&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Bakkamera&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -83,7 +83,7 @@
         <widget class="QLabel" name="label_2">
          <property name="maximumSize">
           <size>
-           <width>582</width>
+           <width>600</width>
            <height>16777215</height>
           </size>
          </property>
@@ -116,14 +116,14 @@ font: 12pt &quot;Sans Serif&quot;;</string>
          </property>
          <property name="minimumSize">
           <size>
-           <width>212</width>
+           <width>206</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>400</width>
-           <height>40</height>
+           <height>49</height>
           </size>
          </property>
          <property name="font">
@@ -149,7 +149,7 @@ font: 12pt &quot;Sans Serif&quot;;</string>
           <enum>QFrame::Box</enum>
          </property>
          <property name="text">
-          <string>Sensor Info</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Sensor Info&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

@@ -1,6 +1,6 @@
-#include <spiworker.h>
+#include <uartworker.h>
 
-void SPIWorker::run()
+void UARTWorker::run()
 {
    qDebug() << "Hello from SPI Thread" << thread()->currentThreadId();
 

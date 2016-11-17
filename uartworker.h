@@ -3,7 +3,8 @@
 #include <QThread>
 #include <QDebug>
 
-class SPIWorker : public QThread
+
+class UARTWorker : public QThread
 {
     Q_OBJECT
 
