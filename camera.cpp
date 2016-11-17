@@ -11,9 +11,13 @@ Camera::Camera(QString width, QString height, QString posX, QString posY)
 
 void Camera::run()
 {
-    QString script = "raspivid -p '" + posX_ + "," + posY_ + "," + width_+ "," + height_ + "' -t 0";
+    QString script = "raspivid -p '" + posX_ + "," + posY_ + "," + width_+ "," + height_ + "' -t 0 -w " + width_ + "-h " + height_;
     QProcess::execute(script);
 
-    qDebug() << "I'm still alive it must have been a miracle!";
+    while(1)
+    {
+        Camera::sleep(1);
+        qDebug() << "I'm still alive it must have been a miracle!";
+    }
 }
 

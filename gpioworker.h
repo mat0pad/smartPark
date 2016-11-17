@@ -3,6 +3,7 @@
 #include <QThread>
 #include <QDebug>
 #include "camera.h"
+#include <QProcess>
 
 class GPIOWorker: public QThread
 {
