@@ -3,8 +3,6 @@
 
 #include <QMainWindow>
 #include <QString>
-#include <QUrl>
-#include <QtWebKit/QWebView>
 
 namespace Ui {
 class MainWindow;
