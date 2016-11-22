@@ -3,6 +3,7 @@
 #include <QThread>
 #include <QDebug>
 #include "camera.h"
+#include <wiringPi.h>
 #include <QProcess>
 
 class GPIOWorker: public QThread
@@ -13,7 +14,13 @@ public:
     void turnOnDisplay(bool shouldTurnOn);
 
 private:
+    void myInterruptDisplay(void);
+    void myInterruptCamera(void);
+    void interruptInit(void);
     void run();
+    bool CameraOn_ = false;
+    bool DisplayOn_ = true;
+    Camera *currentCamera_ = NULL;
 
 signals:
     void turnOnSection(bool shouldTurnOn);

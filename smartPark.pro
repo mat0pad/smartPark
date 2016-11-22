@@ -10,18 +10,22 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = smartPark
 TEMPLATE = app
-
+//LIBS += -L/usr/local/lib -lwiringPi
+//INCLUDEPATH    += /usr/local/include
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     gpioworker.cpp \
     uartworker.cpp \
-    camera.cpp
+    camera.cpp \
+    Uart.cpp
 
 HEADERS  += mainwindow.h \
     gpioworker.h \
     uartworker.h \
-    camera.h
+    camera.h \
+    Uart.h \
+    rangedefiner.h
 
 FORMS    += mainwindow.ui
 

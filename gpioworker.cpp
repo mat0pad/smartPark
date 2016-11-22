@@ -1,32 +1,16 @@
 #include "gpioworker.h"
 
+
+
+
 void GPIOWorker::run()
 {
     qDebug() << "Hello from GPIO Thread" << thread()->currentThreadId();
 
-    emit turnOnSection(true);
-
-    GPIOWorker::sleep(5);
-
-    emit turnOnSection(false);
+    interruptInit();
 
     while(1)
     {
-            Camera cTest;
-
-            cTest.start();
-
-            GPIOWorker::sleep(15);
-
-            cTest.terminate();
-
-            GPIOWorker::sleep(5);
-
-            turnOnDisplay(true);
-
-            GPIOWorker::sleep(5);
-
-            turnOnDisplay(false);
     }
 }
 
@@ -39,5 +23,42 @@ void GPIOWorker::turnOnDisplay(bool shouldTurnOn)
             QProcess::execute("sudo bash -c \"echo 1 > /sys/class/backlight/rpi_backlight/bl_power\"");
 
 }
+
+void GPIOWorker::myInterruptCamera(void )
+{
+    if(!CameraOn_)
+    {
+        currentCamera_ = new Camera();
+        currentCamera_->start();
+        CameraOn = false;
+    }
+    else{
+        currentCamera_->terminate();
+        currentCamera_ = NULL;
+        CameraOn_ = true;
+    }
+}
+
+void GPIOWorker::myInterruptDisplay(void)
+{
+    if(DisplayOn_)
+    {
+        DisplayOn_ = false;
+        turnOnDisplay(DisplayOn_);
+    }
+    else{
+    DisplayOn_ = true;
+    turnOnDisplay(DisplayOn_);
+    }
+}
+
+void GPIOWorker::interruptInit(void)
+{
+    wiringPisetup();
+    wiringPiISR(0, INT_EDGE_RISING,&GPIOWorker::myInterruptCamera);
+    wiringPiISR(1, INT_EDGE_RISING,&GPIOWorker::myInterruptDisplay);
+}
+
+
 
 
