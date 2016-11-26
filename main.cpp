@@ -19,9 +19,6 @@ int main(int argc, char *argv[])
     // All images is invisible
     w.setAllImages2Zero();
 
-    // Show camera feed
-    w.startCamera();
-
     /** SPI THREAD SETUP START **/
     // Create SPI Thread
     UARTWorker uartWorker;
