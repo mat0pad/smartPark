@@ -31,14 +31,14 @@ void GPIOWorker::myInterruptCamera(void )
         qDebug() << "Starting Camera\n";
         GPIOWorker::currentCamera_ = new Camera();
         GPIOWorker::currentCamera_->start();
-        GPIOWorker::CameraOn_ = false;
+        GPIOWorker::CameraOn_ = true;
         GPIOWorker::sleep(1);
     }
     else{
         qDebug() << "Turning off Camera\n";
         GPIOWorker::currentCamera_->terminate();
         GPIOWorker::currentCamera_ = NULL;
-        GPIOWorker::CameraOn_ = true;
+        GPIOWorker::CameraOn_ = false;
     }
 }
 
