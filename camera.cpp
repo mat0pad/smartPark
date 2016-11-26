@@ -18,7 +18,5 @@ void Camera::run()
 
     while(1)
     {
-        Camera::sleep(1);
-        qDebug() << "I'm still alive it must have been a miracle!";
     }
 }
