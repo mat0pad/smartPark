@@ -9,7 +9,7 @@ public:
     bool rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput) {
 
         //Bestemmer hvilket niveau input er på
-        if (rangeInput >= 0 && rangeInput < 200) {
+        if (rangeInput < 200) {
             if (3 != SensorNivaue_[SensorNumber]) {
                 SensorNivaue_[SensorNumber] = 3;
                 return true;

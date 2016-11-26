@@ -4,7 +4,6 @@ bool GPIOWorker::CameraOn_ = false;
 bool GPIOWorker::DisplayOn_ = true;
 Camera *GPIOWorker::currentCamera_ = NULL;
 
-int globalint =0;
 
 void GPIOWorker::run()
 {
@@ -33,6 +32,7 @@ void GPIOWorker::myInterruptCamera(void )
         GPIOWorker::currentCamera_ = new Camera();
         GPIOWorker::currentCamera_->start();
         GPIOWorker::CameraOn_ = false;
+        GPIOWorker::sleep(1);
     }
     else{
         qDebug() << "Turning off Camera\n";
@@ -70,11 +70,7 @@ void InterruptCamera(void)
 
 void InterruptDisplay(void)
 {
-    if(globalint>0)
-    {
     GPIOWorker::myInterruptDisplay();
-    }
-    globalint++;
 }
 
 
