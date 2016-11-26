@@ -8,10 +8,12 @@ Camera::Camera(QString width, QString height, QString posX, QString posY)
     posY_ = posY;
 }
 
-
 void Camera::run()
 {
-    QString script = "raspivid -p '" + posX_ + "," + posY_ + "," + width_+ "," + height_ + "' -t 0 -w " + width_ + "-h " + height_;
+    QString script = "raspivid -w " + width_ + " -h " + height_ + " -t 0 -p " + posX_ + "," + posY_ + "," + width_+ "," + height_ + "'";
+
+    qDebug() << script;
+
     QProcess::execute(script);
 
     while(1)
@@ -20,4 +22,3 @@ void Camera::run()
         qDebug() << "I'm still alive it must have been a miracle!";
     }
 }
-
