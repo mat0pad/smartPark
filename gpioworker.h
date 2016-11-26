@@ -6,21 +6,23 @@
 #include <wiringPi.h>
 #include <QProcess>
 
+void InterruptCamera(void);
+void InterruptDisplay(void);
+
 class GPIOWorker: public QThread
 {
     Q_OBJECT
 
 public:
-    void turnOnDisplay(bool shouldTurnOn);
-
+    static void myInterruptDisplay(void);
+    static void myInterruptCamera(void);
 private:
-    void myInterruptDisplay(void);
-    void myInterruptCamera(void);
+    static void turnOnDisplay(bool shouldTurnOn);
     void interruptInit(void);
     void run();
-    bool CameraOn_ = false;
-    bool DisplayOn_ = true;
-    Camera *currentCamera_ = NULL;
+    static bool CameraOn_;
+    static bool DisplayOn_;
+    static Camera *currentCamera_;
 
 signals:
     void turnOnSection(bool shouldTurnOn);

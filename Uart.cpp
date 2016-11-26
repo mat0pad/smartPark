@@ -16,7 +16,7 @@ char Uart::UartInit()
 }
 
 
-Uart::Uart(unsigned int baudrate = 115200)
+Uart::Uart(unsigned int baudrate)
 {
     // mangler checks for om baudrate findes
     baudRate_ = baudrate;
