@@ -6,9 +6,10 @@
 void GPIOWorker::run()
 {
     qDebug() << "Hello from GPIO Thread" << thread()->currentThreadId();
-
+    GPIOWorker::CameraOn_ = false;
+    GPIOWorker::DisplayOn_ = true;
+    GPIOWorker::currentCamera_ = NULL;
     interruptInit();
-
     while(1)
     {
     }
@@ -26,39 +27,48 @@ void GPIOWorker::turnOnDisplay(bool shouldTurnOn)
 
 void GPIOWorker::myInterruptCamera(void )
 {
-    if(!CameraOn_)
+    if(!GPIOWorker::CameraOn_)
     {
-        currentCamera_ = new Camera();
-        currentCamera_->start();
-        CameraOn = false;
+        GPIOWorker::currentCamera_ = new Camera();
+        GPIOWorker::currentCamera_->start();
+        GPIOWorker::CameraOn_ = false;
     }
     else{
-        currentCamera_->terminate();
-        currentCamera_ = NULL;
-        CameraOn_ = true;
+        GPIOWorker::currentCamera_->terminate();
+        GPIOWorker::currentCamera_ = NULL;
+        GPIOWorker::CameraOn_ = true;
     }
 }
 
 void GPIOWorker::myInterruptDisplay(void)
 {
-    if(DisplayOn_)
+    if(GPIOWorker::DisplayOn_)
     {
-        DisplayOn_ = false;
-        turnOnDisplay(DisplayOn_);
+        GPIOWorker::DisplayOn_ = false;
+        GPIOWorker::turnOnDisplay(GPIOWorker::DisplayOn_);
     }
     else{
-    DisplayOn_ = true;
-    turnOnDisplay(DisplayOn_);
+    GPIOWorker::DisplayOn_ = true;
+    GPIOWorker::turnOnDisplay(GPIOWorker::DisplayOn_);
     }
 }
 
 void GPIOWorker::interruptInit(void)
 {
     wiringPisetup();
-    wiringPiISR(0, INT_EDGE_RISING,&GPIOWorker::myInterruptCamera);
-    wiringPiISR(1, INT_EDGE_RISING,&GPIOWorker::myInterruptDisplay);
+    wiringPiISR(0, INT_EDGE_RISING,&GPIOWorker::InterruptCamera);
+    wiringPiISR(1, INT_EDGE_RISING,&GPIOWorker::InterruptDisplay);
 }
 
+void InterruptCamera(void)
+{
+    GPIOWorker::myInterruptCamera();
+}
+
+void InterruptDisplay(void)
+{
+    GPIOWorker::myInterruptDisplay();
+}
 
 
 
