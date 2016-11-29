@@ -12,8 +12,6 @@
 // Da dette ikke er nÃ¸dvendigt uart er kun sat op til at modtage.
 class Uart
 {
-    Q_OBJECT
-
 public:
     Uart(unsigned int baudrate = 115200); //construct kalder uartInit
     ~Uart();  // destructor

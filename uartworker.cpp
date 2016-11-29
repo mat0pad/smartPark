@@ -30,8 +30,8 @@ void UARTWorker::run()
         }
 
         /** DEBUG **/
-        UARTWorker::sleep(2);
-        emit onSoundPlay(5);
+        //UARTWorker::sleep(2);
+        //emit onSoundPlay(5);
    }
 }
 

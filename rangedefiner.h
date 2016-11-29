@@ -6,7 +6,6 @@
 // Nivaue 3 er mellem 0-20, Nivaue 2 er mellem 20-60,Nivaue 3 er mellem 60-150 cm
 class rangeDefiner
 {
-    Q_OBJECT
 
 public:
     bool rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput) {

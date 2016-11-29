@@ -13,8 +13,8 @@ void SoundWorker::run()
     {}
 }
 
-void playSound(unsigned int range)
+void SoundWorker::playSound(unsigned int range)
 {
     /** DEBUG **/
-    qDebug() << "You called me and I answer! Range is: " << range << thread()->currentThreadId();
+    qDebug() << "You called me and I answer! Range is: " << range;
 }
