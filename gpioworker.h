@@ -22,7 +22,7 @@ private:
     void run();
     static bool CameraOn_;
     static bool DisplayOn_;
-    static Camera *currentCamera_ = NULL;
+    static Camera *currentCamera_;
 
 signals:
     void turnOnSection(bool shouldTurnOn);

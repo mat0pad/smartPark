@@ -10,7 +10,7 @@ class Camera : public QThread
     Q_OBJECT
 
 public:
-    Camera(QString width = "437", QString height = "582", QString posX = "0", QString posY_ = "49");
+    Camera(QString width = "595", QString height = "437", QString posX = "0", QString posY_ = "49");
 
 private:
     void run();

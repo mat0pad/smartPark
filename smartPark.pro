@@ -10,8 +10,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = smartPark
 TEMPLATE = app
-//LIBS += -L/usr/local/lib -lwiringPi
-//INCLUDEPATH    += /usr/local/include
+LIBS += -L/usr/local/lib -lwiringPi
+INCLUDEPATH    += /usr/local/include
 
 SOURCES += main.cpp\
         mainwindow.cpp \
