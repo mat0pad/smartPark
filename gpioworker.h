@@ -23,7 +23,7 @@ private:
     static bool CameraOn_;
     static bool DisplayOn_;
     static Camera *currentCamera_;
-    static  GPIOWorker  *GPIOptr;
+   // static  GPIOWorker  *GPIOptr;
 
 signals:
     void turnOnSection(bool shouldTurnOn);
