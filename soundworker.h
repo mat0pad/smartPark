@@ -19,7 +19,7 @@ private:
 
 public slots:
     void playSound(unsigned char Nivaue);
-    void turnOnOff(void);
+    void turnOnOff(bool);
 };
 
 #endif // SOUNDWORKER_H

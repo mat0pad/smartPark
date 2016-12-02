@@ -4,6 +4,8 @@
 bool GPIOWorker::CameraOn_ = false;
 bool GPIOWorker::DisplayOn_ = true;
 Camera *GPIOWorker::currentCamera_ = NULL;
+//Needs a GPIOWorker pointer to call the toogleMusic signals, since signals can't be static.
+GPIOWorker *GPIOWorker::GPIOptr = new GPIOptr;
 
 
 void GPIOWorker::run()
@@ -80,7 +82,8 @@ void InterruptCamera(void)
 void InterruptDisplay(void)
 {
     GPIOWorker::myInterruptDisplay();
-    GPIOWorker::toggleMusic();
+    //SIgnaling soundworker with turning on music
+    GPIOptr->toggleMusic(GPIOWorker::DisplayOn_);
 }
 
 

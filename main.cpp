@@ -62,8 +62,8 @@ int main(int argc, char *argv[])
 
     //Setup connection between GPIO thread & SOUND thread
     QObject::connect(&gpioWorker,
-                     SIGNAL(toggleMusic()), &soundworker,
-                     SLOT(turnOnOff()), Qt::QueuedConnection);
+                     SIGNAL(toggleMusic(bool)), &soundworker,
+                     SLOT(turnOnOff(bool)), Qt::QueuedConnection);
 
     QObject::connect(&gpioWorker, SIGNAL(finished()), &soundworker, SLOT(deleteLater()));
     // Start -> calls run()

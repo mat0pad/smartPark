@@ -23,10 +23,11 @@ private:
     static bool CameraOn_;
     static bool DisplayOn_;
     static Camera *currentCamera_;
+    static const GPIOWorker * const GPIOptr;
 
 signals:
     void turnOnSection(bool shouldTurnOn);
-    static void toggleMusic(void);
+    void toggleMusic(bool MusicOn);
 
 };
 

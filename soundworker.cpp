@@ -45,9 +45,9 @@ void SoundWorker::playSound(unsigned char Nivaue)
     qDebug() << "You called me and I answer! Range is: " << Nivaue;
 }
 
-void SoundWorker::turnOnOff()
+void SoundWorker::turnOnOff(bool MusicOn)
 {
-    setMusicOn(!MusicOn_);
+    setMusicOn(MusicOn);
 }
 
 
