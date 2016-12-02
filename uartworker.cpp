@@ -32,7 +32,7 @@ void UARTWorker::run()
 
         /** DEBUG **/
         UARTWorker::sleep(2);
-        emit onSoundPlay(5);
+        emit onSoundPlay(2);
    }
 }
 

@@ -16,9 +16,9 @@ void SoundWorker::run()
         if(Nivaue_ > 0 && MusicOn_)
         {
             sleep(Nivaue_);
-            QDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
+            qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
             sleep(Nivaue_);
-            Qdebug() << "Stopping sound\n";
+            qDebug() << "Stopping sound\n";
 
         }
 
@@ -47,6 +47,7 @@ void SoundWorker::playSound(unsigned char Nivaue)
 
 void SoundWorker::turnOnOff(bool MusicOn)
 {
+    qDebug() << "Called from GPIO\n";
     setMusicOn(MusicOn);
 }
 
