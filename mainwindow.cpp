@@ -14,12 +14,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::startCamera()
-{
-
-}
-
-
 void MainWindow::setImage(unsigned char imageSelect, unsigned char image)
 {
     QString prefix = ":/new/images/";
@@ -75,25 +69,11 @@ void MainWindow::setImage(unsigned char imageSelect, unsigned char image)
 
 void MainWindow::onSensorChanged(unsigned char imageSelect, unsigned char image)
 {
-        // Processing code
-        qDebug() << "GUI Thread: Changing sensor data";
+        /** DEBUG **/
+        //qDebug() << "GUI Thread: Changing sensor data";
 
+        // Set image frame for imageSelect
         setImage(imageSelect,image);
-}
-
-
-void MainWindow::onSectionChanged(bool shouldTurnOn)
-{
-    // Processing code
-    qDebug() << "GUI Thread: Changing section visiblity";
-    if(shouldTurnOn)
-    {
-        qDebug() << "Section visible";
-    }
-    else
-    {
-        qDebug() << "Section invisible";
-    }
 }
 
 void MainWindow::setAllImages2Zero()

@@ -1,10 +1,12 @@
-#pragma once
-
+#ifndef RANGEDEFINER_H
+#define RANGEDEFINER_H
 #include <stdio.h>
 
 
 // Nivaue 3 er mellem 0-20, Nivaue 2 er mellem 20-60,Nivaue 3 er mellem 60-150 cm
-class rangeDefiner {
+class rangeDefiner
+{
+
 public:
     bool rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput) {
 
@@ -16,7 +18,6 @@ public:
             }
             return false;
         }
-
         else if (rangeInput >= 200 && rangeInput < 600) {
             if (2 != SensorNivaue_[SensorNumber]) {
                 SensorNivaue_[SensorNumber] = 2;
@@ -24,7 +25,6 @@ public:
             }
             return false;
         }
-
         else if (rangeInput >= 600 && rangeInput < 1500) {
             if (1 != SensorNivaue_[SensorNumber]) {
                 SensorNivaue_[SensorNumber] = 1;
@@ -50,3 +50,5 @@ private:
     int rangeInput_;
     unsigned char SensorNivaue_[6] = {0};
 };
+
+#endif // RANGEDEFINER_H

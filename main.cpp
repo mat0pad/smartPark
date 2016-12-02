@@ -3,12 +3,15 @@
 #include <uartworker.h>
 #include <QDebug>
 #include <gpioworker.h>
+#include <soundworker.h>
 
 int main(int argc, char *argv[])
 {
     // Create GUI Thread
     QApplication app(argc, argv);
-    qDebug() << "Hello from GUI thread" << app.thread()->currentThreadId();
+
+    /** DEBUG **/
+    //qDebug() << "Hello from GUI thread" << app.thread()->currentThreadId();
 
     // Setup UI
     MainWindow w;
@@ -16,14 +19,14 @@ int main(int argc, char *argv[])
     w.setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     w.showFullScreen();
 
-    // All images is invisible
+    // All senosr images invisible at start
     w.setAllImages2Zero();
 
-    /** SPI THREAD SETUP START **/
-    // Create SPI Thread
+    /** UART THREAD SETUP START **/
+    // Create UART Thread
     UARTWorker uartWorker;
 
-    // Setup connection between SPI thread & GUI thread
+    // Setup connection between UART thread & GUI thread
     QObject::connect(&uartWorker,
                      SIGNAL(progressChanged(unsigned char, unsigned char)), &w,
                      SLOT(onSensorChanged(unsigned char,unsigned char)), Qt::QueuedConnection);
@@ -33,28 +36,44 @@ int main(int argc, char *argv[])
 
     // Start -> calls run()
     uartWorker.start();
-
-    /** SPI THREAD SETUP END **/
+    /** UART THREAD SETUP END **/
 
     /** GPIO THREAD SETUP START **/
     // Create GPIO Thread
-    GPIOWorker gpioWorker;
-
-    // Setup connection between GPIO thread & GUI thread
-    QObject::connect(&gpioWorker,
-                     SIGNAL(turnOnSection(bool)), &w,
-                     SLOT(onSectionChanged(bool)), Qt::QueuedConnection);
-
-    // Setup callback for cleanup when it finishes
-    QObject::connect(&gpioWorker, SIGNAL(finished()), &w, SLOT(deleteLater()));
+    GPIOWorker gpioWorker();
+    GPIOWorke  *gpioWorkerPtr;
 
     // Start -> calls run()
     gpioWorker.start();
-
     /** GPIO THREAD SETUP END **/
+
+
+    /** SOUND THREAD SETUP START **/
+    // Create SOUND Thread
+    SoundWorker soundworker;
+
+    // Setup connection between UART thread & SOUND thread
+    QObject::connect(&uartWorker,
+                     SIGNAL(onSoundPlay(unsigned char)), &soundworker,
+                     SLOT(playSound(unsigned char)), Qt::QueuedConnection);
+
+
+    // Setup callback for cleanup when it finishes
+    QObject::connect(&uartWorker, SIGNAL(finished()), &soundworker, SLOT(deleteLater()));
+
+    //Setup connection between GPIO thread & SOUND thread
+    QObject::connect(&gpioWorker,
+                     SIGNAL(toggleMusic(bool)), &soundworker,
+                     SLOT(turnOnOff(bool)), Qt::QueuedConnection);
+
+    QObject::connect(&gpioWorker, SIGNAL(finished()), &soundworker, SLOT(deleteLater()));
+    // Start -> calls run()
+    soundworker.start();
+    /** SOUND THREAD SETUP END **/
 
     app.exec();
 
+    soundworker.wait();
     uartWorker.wait();
     gpioWorker.wait();
 

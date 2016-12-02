@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     gpioworker.cpp \
     uartworker.cpp \
     camera.cpp \
-    Uart.cpp
+    uart.cpp \
+    soundworker.cpp
 
 HEADERS  += mainwindow.h \
     gpioworker.h \
     uartworker.h \
     camera.h \
-    Uart.h \
-    rangedefiner.h
+    rangedefiner.h \
+    uart.h \
+    soundworker.h
 
 FORMS    += mainwindow.ui
 

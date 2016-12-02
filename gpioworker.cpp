@@ -1,59 +1,73 @@
 #include "gpioworker.h"
 
-bool GPIOWorker::CameraOn_ = false;
-bool GPIOWorker::DisplayOn_ = true;
-Camera *GPIOWorker::currentCamera_ = NULL;
+//Needs a GPIOWorker pointer to call the toogleMusic signals, since signals can't be static.
+GPIOWorker *GPIOWorker::GPIOPtr_ = NULL;
+
+
+GPIOWorker::GPIOWorker(GPIOWorker *GPIOPtr)
+{
+    GPIOPtr_ = GPIOPtr;
+}
 
 
 void GPIOWorker::run()
 {
-    qDebug() << "Hello from GPIO Thread" << thread()->currentThreadId();
+    /** DEBUG **/
+    //qDebug() << "Hello from GPIO Thread" << thread()->currentThreadId();
 
     interruptInit();
+
     while(1)
-    {
-    }
+    {}
 }
 
 void GPIOWorker::turnOnDisplay(bool shouldTurnOn)
 {
-    // Turn off/on display here'
+    // Turn off/on display here
     if(shouldTurnOn)
         QProcess::execute("sudo bash -c \"echo 0 > /sys/class/backlight/rpi_backlight/bl_power\"");
     else
-            QProcess::execute("sudo bash -c \"echo 1 > /sys/class/backlight/rpi_backlight/bl_power\"");
+        QProcess::execute("sudo bash -c \"echo 1 > /sys/class/backlight/rpi_backlight/bl_power\"");
 
 }
 
 void GPIOWorker::myInterruptCamera(void )
 {
-    if(!GPIOWorker::CameraOn_)
+    if(!CameraOn_)
     {
-        qDebug() << "Starting Camera\n";
-        GPIOWorker::currentCamera_ = new Camera();
-        GPIOWorker::currentCamera_->start();
-        GPIOWorker::CameraOn_ = true;
-        GPIOWorker::sleep(1);
+        /** DEBUG **/
+        //qDebug() << "Starting Camera\n";
+
+        currentCamera_ = new Camera();
+        currentCamera_->start();
+        CameraOn_ = true;
+        sleep(1);
     }
-    else{
-        qDebug() << "Turning off Camera\n";
-        GPIOWorker::currentCamera_->terminate();
-        GPIOWorker::currentCamera_ = NULL;
-        GPIOWorker::CameraOn_ = false;
+    else
+    {
+        /** DEBUG **/
+        //qDebug() << "Turning off Camera\n";
+
+        currentCamera_->terminate();
+        currentCamera_ = NULL;
+        CameraOn_ = false;
     }
 }
 
 void GPIOWorker::myInterruptDisplay(void)
 {
-    if(GPIOWorker::DisplayOn_)
+    if(DisplayOn_)
     {
-        GPIOWorker::DisplayOn_ = false;
-        GPIOWorker::turnOnDisplay(GPIOWorker::DisplayOn_);
+        DisplayOn_ = false;
+        turnOnDisplay(DisplayOn_);
     }
-    else{
-    GPIOWorker::DisplayOn_ = true;
-    GPIOWorker::turnOnDisplay(GPIOWorker::DisplayOn_);
+    else
+    {
+        DisplayOn_ = true;
+        turnOnDisplay(DisplayOn_);
     }
+     //SIgnaling soundworker with turning on music
+     emit toggleMusic(DisplayOn_);
 }
 
 void GPIOWorker::interruptInit(void)
@@ -66,13 +80,12 @@ void GPIOWorker::interruptInit(void)
 
 void InterruptCamera(void)
 {
-    GPIOWorker::myInterruptCamera();
+    GPIOWorker::GPIOPtr_->myInterruptCamera();
 }
-
 
 void InterruptDisplay(void)
 {
-    GPIOWorker::myInterruptDisplay();
+    GPIOWorker::GPIOPtr_->myInterruptDisplay();
 }
 
 

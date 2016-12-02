@@ -18,10 +18,6 @@ private:
     QString width_;
     QString posX_;
     QString posY_;
-
-signals:
-
-public slots:
 };
 
 #endif // CAMERA_H

@@ -12,11 +12,12 @@ void Camera::run()
 {
     QString script = "raspivid -w " + width_ + " -h " + height_ + " -t 0 -p " + posX_ + "," + posY_ + "," + width_+ "," + height_ + "'";
 
-    qDebug() << script;
+    /** DEBUG **/
+    //qDebug() << script;
 
     QProcess::execute(script);
 
+    // Ensure camera stays on if not blocking thread
     while(1)
-    {
-    }
+    {}
 }

@@ -14,18 +14,21 @@ class GPIOWorker: public QThread
     Q_OBJECT
 
 public:
-    static void myInterruptDisplay(void);
-    static void myInterruptCamera(void);
+    GPIOWorker(GPIOWorker *GPIOPtr);
+    void myInterruptDisplay(void);
+    void myInterruptCamera(void);
+    static GPIOWorker *GPIOPtr_;
 private:
-    static void turnOnDisplay(bool shouldTurnOn);
+    void turnOnDisplay(bool shouldTurnOn);
     void interruptInit(void);
     void run();
-    static bool CameraOn_;
-    static bool DisplayOn_;
-    static Camera *currentCamera_;
+    bool CameraOn_;
+    bool DisplayOn_;
+    Camera *currentCamera_;
 
 signals:
     void turnOnSection(bool shouldTurnOn);
+    void toggleMusic(bool MusicOn);
 
 };
 
