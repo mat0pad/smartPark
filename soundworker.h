@@ -10,9 +10,16 @@ class SoundWorker : public QThread
 public:
     SoundWorker();
     void run();
+    void setNivaue(unsigned char Nivaue);
+    void setMusicOn(bool);
+private:
+    unsigned char Nivaue_;
+    bool MusicOn_;
+
 
 public slots:
-    void playSound(unsigned int range);
+    void playSound(unsigned char Nivaue);
+    void turnOnOff(void);
 };
 
 #endif // SOUNDWORKER_H

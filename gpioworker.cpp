@@ -80,6 +80,7 @@ void InterruptCamera(void)
 void InterruptDisplay(void)
 {
     GPIOWorker::myInterruptDisplay();
+    GPIOWorker::toggleMusic();
 }
 
 

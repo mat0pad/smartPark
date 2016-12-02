@@ -26,6 +26,7 @@ private:
 
 signals:
     void turnOnSection(bool shouldTurnOn);
+    static void toggleMusic(void);
 
 };
 
