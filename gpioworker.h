@@ -14,7 +14,7 @@ class GPIOWorker: public QThread
     Q_OBJECT
 
 public:
-    GPIOWorker(GPIOWorker *GPIOPtr);
+    GPIOWorker();
     void myInterruptDisplay(void);
     void myInterruptCamera(void);
     static GPIOWorker *GPIOPtr_;

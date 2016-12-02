@@ -4,9 +4,9 @@
 GPIOWorker *GPIOWorker::GPIOPtr_ = NULL;
 
 
-GPIOWorker::GPIOWorker(GPIOWorker *GPIOPtr)
+GPIOWorker::GPIOWorker()
 {
-    GPIOPtr_ = GPIOPtr;
+    GPIOWorker::GPIOPtr_ = this;
 }
 
 

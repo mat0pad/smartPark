@@ -40,8 +40,8 @@ int main(int argc, char *argv[])
 
     /** GPIO THREAD SETUP START **/
     // Create GPIO Thread
-    GPIOWorker gpioWorker();
-    GPIOWorke  *gpioWorkerPtr;
+    GPIOWorker gpioWorker;
+    //GPIOWorker  *gpioWorkerPtr = gpioWorker;
 
     // Start -> calls run()
     gpioWorker.start();
