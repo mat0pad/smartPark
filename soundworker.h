@@ -2,6 +2,7 @@
 #define SOUNDWORKER_H
 #include <QThread>
 #include <QDebug>
+#include "sysfsgpio.h"
 
 class SoundWorker : public QThread
 {
@@ -15,7 +16,7 @@ public:
 private:
     unsigned char Nivaue_;
     bool MusicOn_;
-
+    sysfsgpio sysgpio_;
 
 public slots:
     void currentNivaue(unsigned char Nivaue);

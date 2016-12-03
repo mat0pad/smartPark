@@ -1,6 +1,6 @@
 #include "soundworker.h"
 
-SoundWorker::SoundWorker()
+SoundWorker::SoundWorker():sysgpio_()
 {
     setNivaue(0);
     setMusicOn(true);

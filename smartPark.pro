@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     uartworker.cpp \
     camera.cpp \
     uart.cpp \
-    soundworker.cpp
+    soundworker.cpp \
+    sysfsgpio.cpp
 
 HEADERS  += mainwindow.h \
     gpioworker.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     camera.h \
     rangedefiner.h \
     uart.h \
-    soundworker.h
+    soundworker.h \
+    sysfsgpio.h
 
 FORMS    += mainwindow.ui
 
