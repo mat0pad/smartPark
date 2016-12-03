@@ -18,15 +18,15 @@ void UARTWorker::run()
             length[1] = uart_.recieve();  //LSB 8bit
             qDebug()  << "addr er: " << addr << "\n";
             qDebug() << "data er: " << (length[0]*32+length[1])/10 << "cm\n";
-
-            rangeDefinerFunc(addr-1,length[0]*32+length[1]);
+            addr-=1;
+            rangeDefinerFunc(addr,length[0]*32+length[1]);
             soundFunc();
             addr = 0;
         }
    }
 }
 
-void UARTWorker::rangeDefinerFunc(unsigned char &SensorNumber, unsigned int &rangeInput)
+void UARTWorker::rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput)
 {
     //Bestemmer hvilket niveau input er på
     if (rangeInput < 200) {
@@ -62,7 +62,7 @@ void UARTWorker::soundFunc(void)
          if(currentSoundNivaue_ < sensorNivaue_[i]){
              currentSoundNivaue_ = sensorNivaue_[i];
              emit onSoundPlay(currentSoundNivaue_);
-             Qdebug() << "Sound increasing value to " << currentSoundNivaue_ << endl;
+             qDebug() << "Sound increasing value to " << currentSoundNivaue_ << endl;
              return;
          }
          else if(temp < sensorNivaue_[i]){
@@ -70,13 +70,13 @@ void UARTWorker::soundFunc(void)
          }
 
      }
-     if(temp < currentNivaue){
+     if(temp < currentSoundNivaue_){
          currentSoundNivaue_ = temp;
          emit onSoundPlay(currentSoundNivaue_);
-         Qdebug() << "Sound decreasing value to " << currentSoundNivaue_ << endl;
+         qDebug() << "Sound decreasing value to " << currentSoundNivaue_ << endl;
      }
      else{
-         Qdebug() << "Nothing changed.." << endl;
+         qDebug() << "Nothing changed.." << endl;
      }
 
 }
@@ -84,5 +84,5 @@ void UARTWorker::soundFunc(void)
 
 unsigned char UARTWorker::getNiveaue(char SensorNumber)
 {
-    return SensorNivaue_[SensorNumber];
+    return sensorNivaue_[SensorNumber];
 }

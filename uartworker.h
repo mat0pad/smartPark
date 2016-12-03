@@ -26,7 +26,7 @@ signals:
 
 private:
     void run();
-    void rangeDefinerFunc(unsigned char &SensorNumber, unsigned int &rangeInput);
+    void rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput);
     void soundFunc(void);
 
 
