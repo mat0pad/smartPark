@@ -2,8 +2,8 @@
 
 SoundWorker::SoundWorker()
 {
-    Nivaue_=0;
-    MusicOn_=true;
+    setNivaue(0);
+    setMusicOn(true);
 }
 
 void SoundWorker::run()
