@@ -19,47 +19,50 @@ void UARTWorker::run()
             qDebug()  << "addr er: " << addr << "\n";
             qDebug() << "data er: " << (length[0]*32+length[1])/10 << "cm\n";
 
-            if(rangeDefinerFunc(addr,length[0]*32+length[1]))
-            {
-                emit progressChanged(addr,getNiveaue(addr));
-            }
+            rangeDefinerFunc(addr-1,length[0]*32+length[1]);
             addr = 0;
         }
 
         /** DEBUG **/
         UARTWorker::sleep(2);
+        rangeDefinerFunc(0,100);
+        UARTWorker::sleep(2);
+        rangeDefinerFunc(1,50);
+        UARTWorker::sleep(2);
+        rangeDefinerFunc(2,200);
+        UARTWorker::sleep(2);
+        rangeDefinerFunc(3,5000);
+        UARTWorker::sleep(2);
+        rangeDefinerFunc(4,50);
         emit onSoundPlay(2);
    }
 }
 
-bool UARTWorker::rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput)
+void UARTWorker::rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput)
 {
     //Bestemmer hvilket niveau input er på
     if (rangeInput < 200) {
         if (3 != SensorNivaue_[SensorNumber]) {
             SensorNivaue_[SensorNumber] = 3;
-            return true;
+            emit progressChanged(SensorNumber+1,3);
         }
-        return false;
     }
     else if (rangeInput >= 200 && rangeInput < 600) {
         if (2 != SensorNivaue_[SensorNumber]) {
             SensorNivaue_[SensorNumber] = 2;
-            return true;
+            emit progressChanged(SensorNumber+1,2);
         }
-        return false;
     }
     else if (rangeInput >= 600 && rangeInput < 1500) {
         if (1 != SensorNivaue_[SensorNumber]) {
             SensorNivaue_[SensorNumber] = 1;
-            return true;
+            emit progressChanged(SensorNumber+1,1);
         }
-        return false;
     }
     else {
         if (0 != SensorNivaue_[SensorNumber]) {
             SensorNivaue_[SensorNumber] = 0;
-            return true;
+            emit progressChanged(SensorNumber+1,0);
         }
         return false;
     }

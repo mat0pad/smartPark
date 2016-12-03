@@ -21,10 +21,11 @@ signals:
 
 private:
     void run();
-    bool rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput);
+    void rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput);
+
+
 
     Uart uart_;
-
     unsigned char SensorNivaue_[6] = {0};
 
 
