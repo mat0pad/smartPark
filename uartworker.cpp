@@ -21,7 +21,7 @@ void UARTWorker::run()
 
             if(rangeDefinerFunc(addr,length[0]*32+length[1]))
             {
-                emit progressChanged(addr,RD.getNiveaue(addr));
+                emit progressChanged(addr,getNiveaue(addr));
             }
             addr = 0;
         }
@@ -32,7 +32,7 @@ void UARTWorker::run()
    }
 }
 
-bool rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput)
+bool UARTWorker::rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput)
 {
     //Bestemmer hvilket niveau input er på
     if (rangeInput < 200) {

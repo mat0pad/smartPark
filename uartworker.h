@@ -11,6 +11,10 @@ class UARTWorker : public QThread
     Q_OBJECT
 public:
     UARTWorker(unsigned int baudrate=115200):uart_(baudrate){}
+    unsigned char getNiveaue(char SensorNumber)
+    {
+        return SensorNivaue_[SensorNumber];
+    }
 signals:
     void progressChanged(unsigned char imageSelect, unsigned char image);
     void onSoundPlay(unsigned char Nivaue);
@@ -19,7 +23,7 @@ private:
     void run();
     bool rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput);
 
-    UART uart_;
+    Uart uart_;
 
     unsigned char SensorNivaue_[6] = {0};
 
