@@ -20,50 +20,69 @@ void UARTWorker::run()
             qDebug() << "data er: " << (length[0]*32+length[1])/10 << "cm\n";
 
             rangeDefinerFunc(addr-1,length[0]*32+length[1]);
+            soundFunc();
             addr = 0;
         }
-
-        /** DEBUG **/
-        UARTWorker::sleep(2);
-        rangeDefinerFunc(0,100);
-        UARTWorker::sleep(2);
-        rangeDefinerFunc(1,50);
-        UARTWorker::sleep(2);
-        rangeDefinerFunc(2,200);
-        UARTWorker::sleep(2);
-        rangeDefinerFunc(3,5000);
-        UARTWorker::sleep(2);
-        rangeDefinerFunc(4,50);
-        emit onSoundPlay(2);
    }
 }
 
-void UARTWorker::rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput)
+void UARTWorker::rangeDefinerFunc(unsigned char &SensorNumber, unsigned int &rangeInput)
 {
     //Bestemmer hvilket niveau input er på
     if (rangeInput < 200) {
-        if (3 != SensorNivaue_[SensorNumber]) {
-            SensorNivaue_[SensorNumber] = 3;
+        if (3 != sensorNivaue_[SensorNumber]) {
+            sensorNivaue_[SensorNumber] = 3;
             emit progressChanged(SensorNumber+1,3);
         }
     }
     else if (rangeInput >= 200 && rangeInput < 600) {
-        if (2 != SensorNivaue_[SensorNumber]) {
-            SensorNivaue_[SensorNumber] = 2;
+        if (2 != sensorNivaue_[SensorNumber]) {
+            sensorNivaue_[SensorNumber] = 2;
             emit progressChanged(SensorNumber+1,2);
         }
     }
     else if (rangeInput >= 600 && rangeInput < 1500) {
-        if (1 != SensorNivaue_[SensorNumber]) {
-            SensorNivaue_[SensorNumber] = 1;
+        if (1 != sensorNivaue_[SensorNumber]) {
+            sensorNivaue_[SensorNumber] = 1;
             emit progressChanged(SensorNumber+1,1);
         }
     }
     else {
-        if (0 != SensorNivaue_[SensorNumber]) {
-            SensorNivaue_[SensorNumber] = 0;
+        if (0 != sensorNivaue_[SensorNumber]) {
+            sensorNivaue_[SensorNumber] = 0;
             emit progressChanged(SensorNumber+1,0);
         }
-        return false;
     }
 } //Funktion stop
+
+void UARTWorker::soundFunc(void)
+{
+    unsigned char temp = 0;
+     for(unsigned char i = 0;i<NUM_OF_SENSORS;++i){
+         if(currentSoundNivaue_ < sensorNivaue_[i]){
+             currentSoundNivaue_ = sensorNivaue_[i];
+             emit onSoundPlay(currentSoundNivaue_);
+             Qdebug() << "Sound increasing value to " << currentSoundNivaue_ << endl;
+             return;
+         }
+         else if(temp < sensorNivaue_[i]){
+             temp = sensorNivaue_[i];
+         }
+
+     }
+     if(temp < currentNivaue){
+         currentSoundNivaue_ = temp;
+         emit onSoundPlay(currentSoundNivaue_);
+         Qdebug() << "Sound decreasing value to " << currentSoundNivaue_ << endl;
+     }
+     else{
+         Qdebug() << "Nothing changed.." << endl;
+     }
+
+}
+
+
+unsigned char UARTWorker::getNiveaue(char SensorNumber)
+{
+    return SensorNivaue_[SensorNumber];
+}
