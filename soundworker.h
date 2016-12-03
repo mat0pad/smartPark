@@ -13,7 +13,7 @@ public:
     void run();
     void setNivaue(unsigned char Nivaue);
     void setMusicOn(bool);
-    void play() const;
+    void play();
 private:
     unsigned char Nivaue_;
     bool MusicOn_;
