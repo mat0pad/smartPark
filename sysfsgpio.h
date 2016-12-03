@@ -19,9 +19,7 @@ public:
     int GPIODirection(int pin,int dir);
     int GPIOWrite(int pin,int value);
 
-signals:
 
-public slots:
 };
 
 #endif // SYSFSGPIO_H

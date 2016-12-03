@@ -8,6 +8,7 @@
 
 #define BUFFER_MAX 10
 #define DIRECTION_MAX 35
+#define VALUE_MAX 30
 
 // Exporter
 int sysfsgpio::GPIOExport(int pin)
