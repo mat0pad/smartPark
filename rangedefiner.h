@@ -47,7 +47,6 @@ public:
     }
 
 private:
-    int rangeInput_;
     unsigned char SensorNivaue_[6] = {0};
 };
 

@@ -18,7 +18,7 @@ private:
 
 
 public slots:
-    void playSound(unsigned char Nivaue);
+    void currentNivaue(unsigned char Nivaue);
     void turnOnOff(bool);
 };
 

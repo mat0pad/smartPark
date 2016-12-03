@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
     // Setup connection between UART thread & SOUND thread
     QObject::connect(&uartWorker,
                      SIGNAL(onSoundPlay(unsigned char)), &soundworker,
-                     SLOT(playSound(unsigned char)), Qt::QueuedConnection);
+                     SLOT(currentNivaue(unsigned char)), Qt::QueuedConnection);
 
 
     // Setup callback for cleanup when it finishes

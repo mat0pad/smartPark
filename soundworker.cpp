@@ -38,7 +38,7 @@ void SoundWorker::setMusicOn(bool MusicOn)
     MusicOn_=MusicOn;
 }
 
-void SoundWorker::playSound(unsigned char Nivaue)
+void SoundWorker::currentNivaue(unsigned char Nivaue)
 {
     /** DEBUG **/
     setNivaue(Nivaue);

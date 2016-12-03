@@ -1,29 +1,25 @@
 #include <uartworker.h>
 #include <uart.h>
-#include <rangedefiner.h>
 
 void UARTWorker::run()
 {
    /** DEBUG **/
    //qDebug() << "Hello from UART Thread" << thread()->currentThreadId();
-
-   Uart u(115200);
-   rangeDefiner RD;
    unsigned char addr; //Addresse pÃ¥ Sensor
    unsigned char  length[2]; //  [0] er Msb 8 bit, [1] LSB 8 BIT
 
    while(1)
    {
 
-        addr = u.recieve(); //Address
+        addr = uart_.recieve(); //Address
         if(  0 < addr && addr < 7) { // hvis addressen ikke er mellem intervallet [1-6],
                                      // tallene [1-7] kan nemlig ikke forekomme i de 2 databit, da der blev right shiftet med 3
-            length[0] = u.recieve();  //MSb 8bit
-            length[1] = u.recieve();  //LSB 8bit
+            length[0] = uart_.recieve();  //MSb 8bit
+            length[1] = uart_.recieve();  //LSB 8bit
             qDebug()  << "addr er: " << addr << "\n";
             qDebug() << "data er: " << (length[0]*32+length[1])/10 << "cm\n";
 
-            if(RD.rangeDefinerFunc(addr,length[0]*32+length[1]))
+            if(rangeDefinerFunc(addr,length[0]*32+length[1]))
             {
                 emit progressChanged(addr,RD.getNiveaue(addr));
             }
@@ -36,4 +32,35 @@ void UARTWorker::run()
    }
 }
 
-
+bool rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput)
+{
+    //Bestemmer hvilket niveau input er på
+    if (rangeInput < 200) {
+        if (3 != SensorNivaue_[SensorNumber]) {
+            SensorNivaue_[SensorNumber] = 3;
+            return true;
+        }
+        return false;
+    }
+    else if (rangeInput >= 200 && rangeInput < 600) {
+        if (2 != SensorNivaue_[SensorNumber]) {
+            SensorNivaue_[SensorNumber] = 2;
+            return true;
+        }
+        return false;
+    }
+    else if (rangeInput >= 600 && rangeInput < 1500) {
+        if (1 != SensorNivaue_[SensorNumber]) {
+            SensorNivaue_[SensorNumber] = 1;
+            return true;
+        }
+        return false;
+    }
+    else {
+        if (0 != SensorNivaue_[SensorNumber]) {
+            SensorNivaue_[SensorNumber] = 0;
+            return true;
+        }
+        return false;
+    }
+} //Funktion stop

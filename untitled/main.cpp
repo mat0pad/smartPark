@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include <QSound>
 #include "unistd.h"
 #include <QtMultimediaKit/QMediaPlayer>
 #include <QDebug>
