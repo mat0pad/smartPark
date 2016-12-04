@@ -18,7 +18,7 @@ public:
 private:
     unsigned char Nivaue_;
     bool MusicOn_;
-    sysfsgpio sysgpio_;
+    SysfsGpio sysgpio_;
 
 public slots:
     void currentNivaue(unsigned char Nivaue);

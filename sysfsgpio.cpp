@@ -1,6 +1,9 @@
 #include "sysfsgpio.h"
 
-#define BUFFER_MAX 10
+#define IN 0
+#define OUT 1
+#define LOW 0
+#define BUFFER_MAX 3
 #define DIRECTION_MAX 35
 #define VALUE_MAX 30
 
@@ -15,7 +18,7 @@ SysfsGpio::SysfsGpio(int pin)
 
 }
 
-SysfsGpio::~SysfGgpio()
+SysfsGpio::~SysfsGpio()
 {
     GPIOUnexport();
 }
@@ -104,7 +107,7 @@ int SysfsGpio::GPIOWrite(int value)
     return(0);
 }
 
-int SysfsGpio::getPin()
+int SysfsGpio::getPin() const
 {
     return pin_;
 }

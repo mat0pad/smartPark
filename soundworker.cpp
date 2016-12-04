@@ -39,27 +39,28 @@ void SoundWorker::play()
     switch(Nivaue_){
     case 0:
         sysgpio_.GPIOWrite(LOW);
+        setNivaue(-1);
         break;
     case 1:
-        qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
+        //qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
         sysgpio_.GPIOWrite(HIGH);
-        sleep(NIVAUE_1_DELAY);
+        msleep(NIVAUE_1_DELAY);
         sysgpio_.GPIOWrite(LOW);
-        sleep(NIVAUE_1_DELAY);
+        msleep(NIVAUE_1_DELAY);
         break;
     case 2:
-        qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
+        //qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
         sysgpio_.GPIOWrite(HIGH);
-        sleep(NIVAUE_2_DELAY);
+        msleep(NIVAUE_2_DELAY);
         sysgpio_.GPIOWrite(LOW);
-        sleep(NIVAUE_2_DELAY);
+        msleep(NIVAUE_2_DELAY);
         break;
     case 3:
-        qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
+        //qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
         sysgpio_.GPIOWrite(HIGH);
-        sleep(NIVAUE_3_DELAY);
+        msleep(NIVAUE_3_DELAY);
         sysgpio_.GPIOWrite(LOW);
-        sleep(NIVAUE_3_DELAY);
+        msleep(NIVAUE_3_DELAY);
         break;
     }
 
@@ -67,7 +68,7 @@ void SoundWorker::play()
 
 void SoundWorker::setNivaue(unsigned char Nivaue)
 {
-    if(Nivaue < 4)
+    if(Nivaue < 4 && Nivaue > -2)
         Nivaue_=Nivaue;
 
 }

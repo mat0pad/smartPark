@@ -8,14 +8,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define SoundPIN 18
+#define SoundPIN 4
 
 
 class SysfsGpio
 {
 public:
     SysfsGpio(int pin = SoundPIN);
-    ~SysfGgpio();
+    ~SysfsGpio();
     int GPIOExport();
     int GPIOUnexport();
     int GPIODirection(int dir);
