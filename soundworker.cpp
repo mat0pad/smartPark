@@ -17,6 +17,11 @@ SoundWorker::SoundWorker():sysgpio_()
     sysgpio_.GPIODirection(SoundPin,1);
 }
 
+SoundWorker::~SoundWorker()
+{
+    sysgpio_.GPIOUnexport(SoundPin);
+}
+
 void SoundWorker::run()
 {
     /** DEBUG **/
