@@ -4,22 +4,19 @@
 #define NIVAUE_2_DELAY 400
 #define NIVAUE_3_DELAY 200
 
-#define SoundPin 18
 
 #define HIGH 1
 #define LOW 0
 
-SoundWorker::SoundWorker():sysgpio_()
+SoundWorker::SoundWorker(int pin):sysgpio_(pin)
 {
     setNivaue(0);
     setMusicOn(true);
-    sysgpio_.GPIOExport(SoundPin);
-    sysgpio_.GPIODirection(SoundPin,1);
+    sysgpio_.GPIODirection(1);
 }
 
 SoundWorker::~SoundWorker()
 {
-    sysgpio_.GPIOUnexport(SoundPin);
 }
 
 void SoundWorker::run()
@@ -41,27 +38,27 @@ void SoundWorker::play()
 {
     switch(Nivaue_){
     case 0:
-        sysgpio_.GPIOWrite(SoundPin,LOW);
+        sysgpio_.GPIOWrite(LOW);
         break;
     case 1:
         qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
-        sysgpio_.GPIOWrite(SoundPin,HIGH);
+        sysgpio_.GPIOWrite(HIGH);
         sleep(NIVAUE_1_DELAY);
-        sysgpio_.GPIOWrite(SoundPin,LOW);
+        sysgpio_.GPIOWrite(LOW);
         sleep(NIVAUE_1_DELAY);
         break;
     case 2:
         qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
-        sysgpio_.GPIOWrite(SoundPin,HIGH);
+        sysgpio_.GPIOWrite(HIGH);
         sleep(NIVAUE_2_DELAY);
-        sysgpio_.GPIOWrite(SoundPin,LOW);
+        sysgpio_.GPIOWrite(LOW);
         sleep(NIVAUE_2_DELAY);
         break;
     case 3:
         qDebug() << "Playing sound with nivaue" << Nivaue_ << "\n";
-        sysgpio_.GPIOWrite(SoundPin,HIGH);
+        sysgpio_.GPIOWrite(HIGH);
         sleep(NIVAUE_3_DELAY);
-        sysgpio_.GPIOWrite(SoundPin,LOW);
+        sysgpio_.GPIOWrite(LOW);
         sleep(NIVAUE_3_DELAY);
         break;
     }

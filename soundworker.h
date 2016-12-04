@@ -9,7 +9,7 @@ class SoundWorker : public QThread
     Q_OBJECT
 
 public:
-    SoundWorker();
+    SoundWorker(int pin = SoundPIN);
     ~SoundWorker();
     void run();
     void setNivaue(unsigned char Nivaue);

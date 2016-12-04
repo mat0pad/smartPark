@@ -1,17 +1,27 @@
 #include "sysfsgpio.h"
 
-#define IN  0
-#define OUT 1
-
-#define LOW  0
-#define HIGH 1
-
 #define BUFFER_MAX 10
 #define DIRECTION_MAX 35
 #define VALUE_MAX 30
 
+SysfsGpio::SysfsGpio(int pin)
+{
+    if(0 < pin)
+        pin_=pin;
+    else{
+        pin_=17;
+    }
+    GPIOExport();
+
+}
+
+SysfsGpio::~SysfGgpio()
+{
+    GPIOUnexport();
+}
+
 // Exporter
-int sysfsgpio::GPIOExport(int pin)
+int SysfsGpio::GPIOExport()
 {
     char buffer[BUFFER_MAX];
     ssize_t bytes_written;
@@ -23,13 +33,13 @@ int sysfsgpio::GPIOExport(int pin)
         return(-1);
     }
 
-    bytes_written = snprintf(buffer, BUFFER_MAX, "%d", pin);
+    bytes_written = snprintf(buffer, BUFFER_MAX, "%d", pin_);
     write(fd, buffer, bytes_written);
     close(fd);
     return(0);
 }
 
-int sysfsgpio::GPIOUnexport(int pin)
+int SysfsGpio::GPIOUnexport()
 {
     char buffer[BUFFER_MAX];
     ssize_t bytes_written;
@@ -41,13 +51,13 @@ int sysfsgpio::GPIOUnexport(int pin)
         return(-1);
     }
 
-    bytes_written = snprintf(buffer, BUFFER_MAX, "%d", pin);
+    bytes_written = snprintf(buffer, BUFFER_MAX, "%d", pin_);
     write(fd, buffer, bytes_written);
     close(fd);
     return(0);
 }
 
-int sysfsgpio::GPIODirection(int pin, int dir)
+int SysfsGpio::GPIODirection(int dir)
 {
     static const char s_directions_str[]  = "in\0out";
 
@@ -55,7 +65,7 @@ int sysfsgpio::GPIODirection(int pin, int dir)
     char path[DIRECTION_MAX];
     int fd;
 
-    snprintf(path, DIRECTION_MAX, "/sys/class/gpio/gpio%d/direction", pin);
+    snprintf(path, DIRECTION_MAX, "/sys/class/gpio/gpio%d/direction", pin_);
     fd = open(path, O_WRONLY);
     if (-1 == fd) {
         fprintf(stderr, "Failed to open gpio direction for writing!\n");
@@ -71,14 +81,14 @@ int sysfsgpio::GPIODirection(int pin, int dir)
     return(0);
 }
 
-int sysfsgpio::GPIOWrite(int pin, int value)
+int SysfsGpio::GPIOWrite(int value)
 {
     static const char s_values_str[] = "01";
 
     char path[VALUE_MAX];
     int fd;
 
-    snprintf(path, VALUE_MAX, "/sys/class/gpio/gpio%d/value", pin);
+    snprintf(path, VALUE_MAX, "/sys/class/gpio/gpio%d/value", pin_);
     fd = open(path, O_WRONLY);
     if (-1 == fd) {
         fprintf(stderr, "Failed to open gpio value for writing!\n");
@@ -92,5 +102,10 @@ int sysfsgpio::GPIOWrite(int pin, int value)
 
     close(fd);
     return(0);
+}
+
+int SysfsGpio::getPin()
+{
+    return pin_;
 }
 
