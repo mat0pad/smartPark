@@ -7,6 +7,12 @@
 #define DIRECTION_MAX 35
 #define VALUE_MAX 30
 
+
+
+/*
+* Constuctor for SysfsGpio, makes sure it is a valid pin
+* Makes sure that pin_ is exported to user space.
+*/
 SysfsGpio::SysfsGpio(int pin)
 {
     if(0 < pin)
@@ -18,12 +24,19 @@ SysfsGpio::SysfsGpio(int pin)
 
 }
 
+/*
+* Deconstructor makes sure the Pin_ is removed from userspace.
+*/
 SysfsGpio::~SysfsGpio()
 {
     GPIOUnexport();
 }
 
-// Exporter
+
+/*
+* Export the Gpio pin to userspace,
+* So it can be used by the application
+*/
 int SysfsGpio::GPIOExport()
 {
     char buffer[BUFFER_MAX];
@@ -42,6 +55,10 @@ int SysfsGpio::GPIOExport()
     return(0);
 }
 
+/*
+* Reverse export the Gpio pin to userspace,
+* So it no longer it can be used.
+*/
 int SysfsGpio::GPIOUnexport()
 {
     char buffer[BUFFER_MAX];
@@ -60,6 +77,11 @@ int SysfsGpio::GPIOUnexport()
     return(0);
 }
 
+
+/*
+* Set Pin_ direction with dir parameter, 0=input, 1=output.
+* return -1 on error, return 0 on succes
+*/
 int SysfsGpio::GPIODirection(int dir)
 {
     static const char s_directions_str[]  = "in\0out";
@@ -84,6 +106,11 @@ int SysfsGpio::GPIODirection(int dir)
     return(0);
 }
 
+/*
+* writes to the pin_ if it sat to output, value defines what to write
+* 1 = HIGH, 0 = LOW
+* return -1 on error, return 0 on succes
+*/
 int SysfsGpio::GPIOWrite(int value)
 {
     static const char s_values_str[] = "01";
@@ -107,6 +134,9 @@ int SysfsGpio::GPIOWrite(int value)
     return(0);
 }
 
+/*
+ * Returns GPIO Number
+ */
 int SysfsGpio::getPin() const
 {
     return pin_;
