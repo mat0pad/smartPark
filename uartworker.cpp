@@ -14,6 +14,7 @@ void UARTWorker::run()
 
    while(1)
    {
+
         addr = u.recieve(); //Address
         if(  0 < addr && addr < 7) { // hvis addressen ikke er mellem intervallet [1-6],
                                      // tallene [1-7] kan nemlig ikke forekomme i de 2 databit, da der blev right shiftet med 3
@@ -30,8 +31,8 @@ void UARTWorker::run()
         }
 
         /** DEBUG **/
-        //UARTWorker::sleep(2);
-        //emit onSoundPlay(5);
+        UARTWorker::sleep(2);
+        emit onSoundPlay(2);
    }
 }
 

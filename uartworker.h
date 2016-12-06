@@ -10,7 +10,7 @@ class UARTWorker : public QThread
 
 signals:
     void progressChanged(unsigned char imageSelect, unsigned char image);
-    void onSoundPlay(unsigned int range);
+    void onSoundPlay(unsigned char Nivaue);
 
 private:
     void run();

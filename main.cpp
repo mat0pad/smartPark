@@ -53,12 +53,19 @@ int main(int argc, char *argv[])
 
     // Setup connection between UART thread & SOUND thread
     QObject::connect(&uartWorker,
-                     SIGNAL(onSoundPlay(unsigned int)), &soundworker,
-                     SLOT(playSound(unsigned int)), Qt::QueuedConnection);
+                     SIGNAL(onSoundPlay(unsigned char)), &soundworker,
+                     SLOT(playSound(unsigned char)), Qt::QueuedConnection);
+
 
     // Setup callback for cleanup when it finishes
     QObject::connect(&uartWorker, SIGNAL(finished()), &soundworker, SLOT(deleteLater()));
 
+    //Setup connection between GPIO thread & SOUND thread
+    QObject::connect(&gpioWorker,
+                     SIGNAL(toggleMusic(bool)), &soundworker,
+                     SLOT(turnOnOff(bool)), Qt::QueuedConnection);
+
+    QObject::connect(&gpioWorker, SIGNAL(finished()), &soundworker, SLOT(deleteLater()));
     // Start -> calls run()
     soundworker.start();
     /** SOUND THREAD SETUP END **/
