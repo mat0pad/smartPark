@@ -2,7 +2,6 @@
 #define UARTWORKER
 #include <QThread>
 #include "Uart.h"
-#include "rangedefiner.h"
 #include <QDebug>
 #define NUM_OF_SENSORS 6
 

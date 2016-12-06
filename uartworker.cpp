@@ -89,7 +89,7 @@ void UARTWorker::soundFunc(void)
 }
 
 
-unsigned char UARTWorker::getNiveaue(char SensorNumber)
+unsigned char UARTWorker::getNiveau(char SensorNumber)
 {
     return sensorNivaue_[SensorNumber];
 }

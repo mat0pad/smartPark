@@ -10,8 +10,6 @@ class SoundWorker : public QThread
 
 public:
     SoundWorker(int pin = SoundPIN);
-    ~SoundWorker();
-    void run();
     void setNivaue(unsigned char Nivaue);
     void setMusicOn(bool);
     void play();
