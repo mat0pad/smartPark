@@ -21,3 +21,4 @@ void Camera::run()
     while(1)
     {}
 }
+ 
