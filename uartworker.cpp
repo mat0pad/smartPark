@@ -9,7 +9,7 @@ void UARTWorker::run()
 {
    /** DEBUG **/
    //qDebug() << "Hello from UART Thread" << thread()->currentThreadId();
-
+   uart_.UartInit();
    unsigned char addr; //Addresse pÃ¥ Sensor
    unsigned char  length[2]; //  [0] er Msb 8 bit, [1] LSB 8 BIT
 
