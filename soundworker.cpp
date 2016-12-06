@@ -62,9 +62,9 @@ void SoundWorker::play()
 
 }
 
-void SoundWorker::setNivaue(unsigned char Nivaue)
+void SoundWorker::setNivaue( unsigned char Nivaue)
 {
-    if(Nivaue < 4 && Nivaue > -2)
+    if(Nivaue < 5)
         Nivaue_=Nivaue;
 
 }

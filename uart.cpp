@@ -1,7 +1,7 @@
 #include "uart.h"
 
 
-char Uart::UartInit()
+int Uart::UartInit()
 {
     int fd;
     if ((fd = serialOpen("/dev/ttyAMA0", baudRate_)) < 0)
@@ -19,7 +19,7 @@ Uart::Uart(unsigned int baudrate)
     // Mangler checks for om baudrate findes
     baudRate_ = baudrate;
     if (UartInit() < 0) {
-  
+      
     }
     qDebug() << "Uartinit called\n";
 }
