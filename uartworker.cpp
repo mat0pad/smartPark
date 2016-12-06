@@ -1,6 +1,10 @@
 #include <uartworker.h>
 #include <uart.h>
 
+#define UPPER_LIMIT_NIVAUE_1 200
+#define UPPER_LIMIT_NIVAUE_2 600
+#define UPPER_LIMIT_NIVAUE_3 1500
+
 void UARTWorker::run()
 {
    /** DEBUG **/
@@ -29,19 +33,19 @@ void UARTWorker::run()
 void UARTWorker::rangeDefinerFunc(unsigned char SensorNumber, unsigned int rangeInput)
 {
     //Bestemmer hvilket niveau input er på
-    if (rangeInput < 200) {
+    if (rangeInput < UPPER_LIMIT_NIVAUE_1) {
         if (3 != sensorNivaue_[SensorNumber]) {
             sensorNivaue_[SensorNumber] = 3;
             emit progressChanged(SensorNumber+1,3);
         }
     }
-    else if (rangeInput >= 200 && rangeInput < 600) {
+    else if (rangeInput >= UPPER_LIMIT_NIVAUE_1 && rangeInput < UPPER_LIMIT_NIVAUE_2) {
         if (2 != sensorNivaue_[SensorNumber]) {
             sensorNivaue_[SensorNumber] = 2;
             emit progressChanged(SensorNumber+1,2);
         }
     }
-    else if (rangeInput >= 600 && rangeInput < 1500) {
+    else if (rangeInput >= UPPER_LIMIT_NIVAUE_2 && rangeInput < UPPER_LIMIT_NIVAUE_3) {
         if (1 != sensorNivaue_[SensorNumber]) {
             sensorNivaue_[SensorNumber] = 1;
             emit progressChanged(SensorNumber+1,1);

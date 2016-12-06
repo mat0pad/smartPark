@@ -26,7 +26,6 @@ HEADERS  += mainwindow.h \
     gpioworker.h \
     uartworker.h \
     camera.h \
-    rangedefiner.h \
     uart.h \
     soundworker.h \
     sysfsgpio.h
