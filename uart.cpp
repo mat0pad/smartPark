@@ -19,8 +19,9 @@ Uart::Uart(unsigned int baudrate)
     // Mangler checks for om baudrate findes
     baudRate_ = baudrate;
     if (UartInit() < 0) {
-      qDebug() << "Uartinit called\n";
+  
     }
+    qDebug() << "Uartinit called\n";
 }
 
 unsigned int Uart::recieve()

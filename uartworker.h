@@ -1,7 +1,7 @@
 #ifndef UARTWORKER
 #define UARTWORKER
 #include <QThread>
-#include "Uart.h"
+#include "uart.h"
 #include <QDebug>
 #define NUM_OF_SENSORS 6
 
