@@ -4,7 +4,6 @@
 #include "Uart.h"
 #include "rangedefiner.h"
 #include <QDebug>
-
 #define NUM_OF_SENSORS 6
 
 
@@ -19,7 +18,8 @@ public:
         currentSoundNivaue_ = 0;
     }
 
-    unsigned char getNiveaue(char SensorNumber);
+    unsigned char getNiveau(char SensorNumber);
+
 signals:
     void progressChanged(unsigned char imageSelect, unsigned char image);
     void onSoundPlay(unsigned char Nivaue);
@@ -33,9 +33,6 @@ private:
     Uart uart_;
     unsigned char sensorNivaue_[NUM_OF_SENSORS];
     unsigned char currentSoundNivaue_;
-
-
-
 };
 
 #endif // UARTWORKER

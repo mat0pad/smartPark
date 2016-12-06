@@ -41,7 +41,6 @@ int main(int argc, char *argv[])
     /** GPIO THREAD SETUP START **/
     // Create GPIO Thread
     GPIOWorker gpioWorker;
-    //GPIOWorker  *gpioWorkerPtr = gpioWorker;
 
     // Start -> calls run()
     gpioWorker.start();
@@ -56,6 +55,7 @@ int main(int argc, char *argv[])
     QObject::connect(&uartWorker,
                      SIGNAL(onSoundPlay(unsigned char)), &soundworker,
                      SLOT(currentNivaue(unsigned char)), Qt::QueuedConnection);
+
 
 
     // Setup callback for cleanup when it finishes

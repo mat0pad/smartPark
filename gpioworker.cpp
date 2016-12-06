@@ -10,6 +10,7 @@ GPIOWorker::GPIOWorker()
 }
 
 
+
 void GPIOWorker::run()
 {
     /** DEBUG **/
@@ -37,7 +38,6 @@ void GPIOWorker::myInterruptCamera(void )
     {
         /** DEBUG **/
         //qDebug() << "Starting Camera\n";
-
         currentCamera_ = new Camera();
         currentCamera_->start();
         CameraOn_ = true;
@@ -46,8 +46,7 @@ void GPIOWorker::myInterruptCamera(void )
     else
     {
         /** DEBUG **/
-        //qDebug() << "Turning off Camera\n";
-
+        //qDebug() << "Turning off Camera\n";s
         currentCamera_->terminate();
         currentCamera_ = NULL;
         CameraOn_ = false;
@@ -68,6 +67,7 @@ void GPIOWorker::myInterruptDisplay(void)
     }
      //SIgnaling soundworker with turning on music
      emit toggleMusic(DisplayOn_);
+
 }
 
 void GPIOWorker::interruptInit(void)

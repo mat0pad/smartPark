@@ -9,12 +9,12 @@ void UARTWorker::run()
 {
    /** DEBUG **/
    //qDebug() << "Hello from UART Thread" << thread()->currentThreadId();
+
    unsigned char addr; //Addresse pÃ¥ Sensor
    unsigned char  length[2]; //  [0] er Msb 8 bit, [1] LSB 8 BIT
 
    while(1)
    {
-
         addr = uart_.recieve(); //Address
         if(  0 < addr && addr < 7) { // hvis addressen ikke er mellem intervallet [1-6],
                                      // tallene [1-7] kan nemlig ikke forekomme i de 2 databit, da der blev right shiftet med 3
@@ -27,6 +27,9 @@ void UARTWorker::run()
             soundFunc();
             addr = 0;
         }
+       /** DEBUG **/
+       // UARTWorker::sleep(2);
+       //emit onSoundPlay(2);
    }
 }
 
@@ -90,3 +93,4 @@ unsigned char UARTWorker::getNiveaue(char SensorNumber)
 {
     return sensorNivaue_[SensorNumber];
 }
+

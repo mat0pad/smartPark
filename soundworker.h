@@ -16,6 +16,7 @@ public:
     void setMusicOn(bool);
     void play();
 private:
+    void run();
     unsigned char Nivaue_;
     bool MusicOn_;
     SysfsGpio sysgpio_;

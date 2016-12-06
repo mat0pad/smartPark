@@ -15,14 +15,10 @@ SoundWorker::SoundWorker(int pin):sysgpio_(pin)
     sysgpio_.GPIODirection(1);
 }
 
-SoundWorker::~SoundWorker()
-{
-}
-
 void SoundWorker::run()
 {
     /** DEBUG **/
-    qDebug() << "Hello from SOUND Thread" << thread()->currentThreadId();
+    //qDebug() << "Hello from SOUND Thread" << thread()->currentThreadId();
 
     while(1)
     {
@@ -78,17 +74,19 @@ void SoundWorker::setMusicOn(bool MusicOn)
     MusicOn_=MusicOn;
 }
 
+
 void SoundWorker::currentNivaue(unsigned char Nivaue)
 {
-    /** DEBUG **/
     setNivaue(Nivaue);
-    qDebug() << "You called me and I answer! Range is: " << Nivaue;
+    /** DEBUG **/
+    //qDebug() << "You called me and I answer! Range is: " << Nivaue;
 }
 
 void SoundWorker::turnOnOff(bool MusicOn)
 {
-    qDebug() << "Called from GPIO\n";
     setMusicOn(MusicOn);
+    /** DEBUG **/
+    //qDebug() << "Called from GPIO\n";
 }
 
 
