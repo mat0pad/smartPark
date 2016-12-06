@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QProcess>
 #include <uartworker.h>
 #include <QDebug>
 #include <gpioworker.h>
@@ -21,6 +22,9 @@ int main(int argc, char *argv[])
 
     // All senosr images invisible at start
     w.setAllImages2Zero();
+
+    // Enable camera
+    QProcess::execute("sudo modprobe bcm2835-v4l2");
 
     /** UART THREAD SETUP START **/
     // Create UART Thread
