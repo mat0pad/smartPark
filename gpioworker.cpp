@@ -65,7 +65,7 @@ void GPIOWorker::myInterruptDisplay(void)
         DisplayOn_ = true;
         turnOnDisplay(DisplayOn_);
     }
-     //SIgnaling soundworker with turning on music
+     //Signaling soundworker with turning on music
      emit toggleMusic(DisplayOn_);
 
 }
