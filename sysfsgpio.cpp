@@ -3,6 +3,7 @@
 #define IN 0
 #define OUT 1
 #define LOW 0
+
 #define BUFFER_MAX 3
 #define DIRECTION_MAX 35
 #define VALUE_MAX 30
@@ -20,7 +21,7 @@ SysfsGpio::SysfsGpio(int pin)
     else{
         pin_=17;
     }
-    GPIOExport();
+    GPIOExport(); //Makes sure the pin is exported to userspace
 
 }
 
@@ -29,7 +30,7 @@ SysfsGpio::SysfsGpio(int pin)
 */
 SysfsGpio::~SysfsGpio()
 {
-    GPIOUnexport();
+    GPIOUnexport(); //Makes sure the pin is reversed to kernel
 }
 
 
@@ -43,15 +44,16 @@ int SysfsGpio::GPIOExport()
     ssize_t bytes_written;
     int fd;
 
+    //Opens gpio Export file, with  only write  permission
     fd = open("/sys/class/gpio/export", O_WRONLY);
-    if (-1 == fd) {
+    if (-1 == fd) { // check for failure
         fprintf(stderr, "Failed to open export for writing!\n");
         return(-1);
     }
 
     bytes_written = snprintf(buffer, BUFFER_MAX, "%d", pin_);
-    write(fd, buffer, bytes_written);
-    close(fd);
+    write(fd, buffer, bytes_written);    // Writes pin Number to the file
+    close(fd); //close file after use
     return(0);
 }
 
@@ -90,8 +92,9 @@ int SysfsGpio::GPIODirection(int dir)
     char path[DIRECTION_MAX];
     int fd;
 
+    // writes "/sys/class/gpio/gpio%d/direction" to path, with pin_ replace %d
     snprintf(path, DIRECTION_MAX, "/sys/class/gpio/gpio%d/direction", pin_);
-    fd = open(path, O_WRONLY);
+    fd = open(path, O_WRONLY); //Open the file with write permission.
     if (-1 == fd) {
         fprintf(stderr, "Failed to open gpio direction for writing!\n");
         return(-1);
