@@ -115,6 +115,10 @@ void SoundWorker::currentNivaue(unsigned char Nivaue)
     //qDebug() << "You called me and I answer! Range is: " << Nivaue;
 }
 
+/*
+ * SLots method for recieving signal from GPioWorker,
+ * recieve MusicOn and calls setMusicOn method
+ */
 void SoundWorker::turnOnOff(bool MusicOn)
 {
     setMusicOn(MusicOn);
