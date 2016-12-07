@@ -18,7 +18,7 @@
 SoundWorker::SoundWorker(int pin):sysgpio_(pin)
 {
 
-    setNivaue(0);
+    setNivaue(1);
     setMusicOn(true);
     sysgpio_.GPIODirection(OUT);
 }

@@ -3,21 +3,21 @@
 #include <QThread>
 #include "uart.h"
 #include <QDebug>
-#define NUM_OF_SENSORS 6
+#define NUM_OF_SENSORS 7
 
 
 class UARTWorker : public QThread
 {
     Q_OBJECT
 public:
-    UARTWorker(unsigned int baudrate=115200):uart_(baudrate)
+    UARTWorker(unsigned int baudrate=9600):uart_(baudrate)
     {
         for(unsigned char i=0;i<NUM_OF_SENSORS;++i)
             sensorNivaue_[i]=0;
         currentSoundNivaue_ = 0;
     }
 
-    unsigned char getNiveau(char SensorNumber);
+    unsigned char getNiveau(unsigned char SensorNumber);
 
 signals:
     void progressChanged(unsigned char imageSelect, unsigned char image);
