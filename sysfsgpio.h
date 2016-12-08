@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define SoundPIN 4
+#define SoundPIN 2
 
 
 class SysfsGpio

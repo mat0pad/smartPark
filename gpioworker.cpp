@@ -1,7 +1,5 @@
 #include "gpioworker.h"
 
-int i=0;
-int j=0;
 //Needs a GPIOWorker pointer to call the toogleMusic signals, since signals can't be static.
 GPIOWorker *GPIOWorker::GPIOPtr_ = NULL;
 
@@ -82,21 +80,14 @@ void GPIOWorker::interruptInit(void)
 
 void InterruptCamera(void)
 {
-    if(i < 1){
-        qDebug() << "Camera er kaldt\n";
-        //GPIOWorker::GPIOPtr_->myInterruptCamera();
-    }
-    i++;
+   GPIOWorker::GPIOPtr_->myInterruptCamera();
+
 }
 
 void InterruptDisplay(void)
 {
-    if(j < 1 )
-    {
-        qDebug() << "Display er kaldt\n";
-        //GPIOWorker::GPIOPtr_->myInterruptDisplay();
-    }
-    j++;
+    GPIOWorker::GPIOPtr_->myInterruptDisplay();
+
 }
 
 

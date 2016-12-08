@@ -22,6 +22,8 @@ SysfsGpio::SysfsGpio(int pin)
         pin_=SoundPIN;
     }
     GPIOExport(); //Makes sure the pin is exported to userspace
+    sleep(1); //Delay for at sikker sig at sysfs kan følge med
+    GPIODirection(OUT);
 
 }
 
