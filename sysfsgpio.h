@@ -23,7 +23,6 @@ public:
     int getPin() const;
 private:
     int pin_;
-    int file_exist(char *filename);
 
 };
 
