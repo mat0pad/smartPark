@@ -3,7 +3,7 @@
 // Delays for each Nivaue, the delay is in ms
 #define NIVAUE_1_DELAY 600
 #define NIVAUE_2_DELAY 400
-#define NIVAUE_3_DELAY 200
+#define NIVAUE_3_DELAY 100
 
 
 #define HIGH 1
