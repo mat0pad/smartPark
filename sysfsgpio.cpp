@@ -22,7 +22,7 @@ SysfsGpio::SysfsGpio(int pin)
         pin_=SoundPIN;
     }
     GPIOExport(); //Makes sure the pin is exported to userspace
-    sleep(1); //Delay for at sikker sig at sysfs kan følge med
+    //sleep(1); //Delay for at sikker sig at sysfs kan følge med
     GPIODirection(OUT);
 
 }
@@ -101,6 +101,7 @@ int SysfsGpio::GPIODirection(int dir)
 
     // writes "/sys/class/gpio/gpio%d/direction" to path, with pin_ replace %d
     snprintf(path, DIRECTION_MAX, "/sys/class/gpio/gpio%d/direction", pin_);
+    file_exist(path);
     fd = open(path, O_WRONLY); //Open the file with write permission.
     if (-1 == fd) {
         fprintf(stderr, "Failed to open gpio direction for writing!\n");
@@ -150,5 +151,12 @@ int SysfsGpio::GPIOWrite(int value)
 int SysfsGpio::getPin() const
 {
     return pin_;
+}
+
+int SysfsGpio::file_exist(char *filename)
+{
+    struct stat buffer;
+    while(stat(filename,&buffer) != 0)
+    {} //Waits for file to get created
 }
 
