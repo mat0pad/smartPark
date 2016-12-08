@@ -19,7 +19,7 @@ SysfsGpio::SysfsGpio(int pin)
     if(0 < pin)
         pin_=pin;
     else{
-        pin_=17;
+        pin_=SoundPIN;
     }
     GPIOExport(); //Makes sure the pin is exported to userspace
 
@@ -37,43 +37,48 @@ SysfsGpio::~SysfsGpio()
 /*
 * Export the Gpio pin to userspace,
 * So it can be used by the application
+* return 0 on succes, -1 on failure
 */
 int SysfsGpio::GPIOExport()
 {
-    char buffer[BUFFER_MAX];
+    char buffer[BUFFER_MAX]; //BUFFER_MAX = 3
     ssize_t bytes_written;
-    int fd;
+    int fd; // File description
 
     //Opens gpio Export file, with  only write  permission
     fd = open("/sys/class/gpio/export", O_WRONLY);
-    if (-1 == fd) { // check for failure
+    if (-1 == fd) { // check if open failed
         fprintf(stderr, "Failed to open export for writing!\n");
-        return(-1);
+        return -1;
     }
 
+    //writes pin_ to bytes written
     bytes_written = snprintf(buffer, BUFFER_MAX, "%d", pin_);
+    //write bytes_written to unexport file.
     write(fd, buffer, bytes_written);    // Writes pin Number to the file
     close(fd); //close file after use
-    return(0);
+    return 0;
 }
 
 /*
 * Reverse export the Gpio pin to userspace,
 * So it no longer it can be used.
+* return 0 on succes, -1 on failure
 */
 int SysfsGpio::GPIOUnexport()
 {
-    char buffer[BUFFER_MAX];
+    char buffer[BUFFER_MAX]; //Buffer = 3
     ssize_t bytes_written;
     int fd;
-
+     //Opens gpio Export file, with  only write  permission
     fd = open("/sys/class/gpio/unexport", O_WRONLY);
-    if (-1 == fd) {
+    if (-1 == fd) { //check if open failed
         fprintf(stderr, "Failed to open unexport for writing!\n");
         return(-1);
     }
-
+    //writes pin_ to bytes written
     bytes_written = snprintf(buffer, BUFFER_MAX, "%d", pin_);
+    //write bytes_written to unexport file.
     write(fd, buffer, bytes_written);
     close(fd);
     return(0);
