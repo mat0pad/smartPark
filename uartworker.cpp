@@ -9,22 +9,23 @@ void UARTWorker::run()
 {
    /** DEBUG **/
    //qDebug() << "Hello from UART Thread" << thread()->currentThreadId();
-   //uart_.UartInit();
-   unsigned char addr; //Addresse pÃ¥ Sensor
-   unsigned char  length[2]; //  [0] er Msb 8 bit, [1] LSB 8 BIT
+
+   unsigned char addr; //Addres recieved for Sensor
+   unsigned char  length[2]; //  [0] is Msb 8 bit, [1] LSB 8 BIT
 
    while(1)
    {
         addr = uart_.recieve(); //Address
-        if(  0 < addr && addr < 7) { // hvis addressen ikke er mellem intervallet [1-6],
-                                     // tallene [1-7] kan nemlig ikke forekomme i de 2 databit, da der blev right shiftet med 3
+        if(  0 < addr && addr < 7) { // Check if the address is valid [1-6].
+         // Since by the UART protocol, the value of either or LSB OR MSB can't be bethween  ]0,8[, since then
+            //we make sure that value can't be seen as an address.
             length[0] = uart_.recieve();  //MSb 8bit
             length[1] = uart_.recieve();  //LSB 8bit
             //qDebug()  << "addr er: " << addr << "\n";
             //qDebug() << "data er: " << (length[0]*32+length[1])/10 << "cm\n";
-            rangeDefinerFunc(addr,length[0]*32+length[1]);
-            soundFunc();
-            addr = 0;
+            rangeDefinerFunc(addr,length[0]*32+length[1]); // Check if their is need to signal mainWorker
+            soundFunc(); // Check if their is need to signal Soundworker
+            addr = 0; // set address ready for new sensor.
         }
 
        /** DEBUG **/
@@ -85,7 +86,6 @@ void UARTWorker::soundFunc(void)
      else{
          //qDebug() << "Nothing changed.." << endl;
      }
-
 }
 
 
