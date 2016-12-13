@@ -16,7 +16,6 @@ public:
     Uart(unsigned int baudrate = 9600); //construct kalder uartInit
     ~Uart();  // destructor
     unsigned int recieve(); //Modtager en char
-    void flush(); //fjerner alt data modtaget.
     int UartInit(); // Init Uart pÃ¥ RPI, gjort private sÃ¥ den ikke kan kaldes udefra
     int fd_;
 private:
